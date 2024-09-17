@@ -30,9 +30,33 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+env:
+  LC_ALL: en_US.UTF-8
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: read
+
 jobs:
+  e2e-ready:
+    permissions:
+      checks: read
+    uses: ./.github/workflows/status-checks.yml
+    with:
+      job_names: >- # Space-separated job names to wait on for status checks
+        DCO
+        actionlint
+        markdown-lint
+        shellcheck
+        spellcheck
+        lint-workflow-complete
+
   start-runner:
     name: Start external EC2 runner
+    needs: ["e2e-ready"]
     runs-on: ubuntu-latest
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
