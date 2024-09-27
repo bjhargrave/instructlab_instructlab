@@ -35,7 +35,7 @@ permissions:
 
 jobs:
   e2e-status-checks:
-    if: ${{ github.repository == 'instructlab/instructlab' }}
+    #if: ${{ github.repository == 'instructlab/instructlab' }}
     permissions:
       checks: read
     uses: ./.github/workflows/status-checks.yml
