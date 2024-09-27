@@ -60,7 +60,7 @@ jobs:
 
       - name: "Store Starter Metadata"
         run: |
-          jq '{"ref": $ref, "number": $number, "event": .}' --arg ref "${{ github.ref }}" --arg number "${{ github.event.number || '0' }}" -- "$GITHUB_EVENT_PATH" > starter.json
+          jq '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "number": "${{ github.event.number || '0' }}", "event": .}' "$GITHUB_EVENT_PATH" > starter.json
 
       - name: "Upload Starter Metadata artifact"
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
