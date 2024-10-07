@@ -36,6 +36,7 @@ defaults:
 permissions:
   contents: read
 
+# change to force build
 jobs:
   e2e-workflow-ready:
     permissions:

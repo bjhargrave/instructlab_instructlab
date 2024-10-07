@@ -37,6 +37,7 @@ defaults:
 permissions:
   contents: read
 
+# change to force build
 jobs:
   test-workflow-ready:
     permissions:
